@@ -1,0 +1,80 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Patient {
+    id       Int      @id @default(autoincrement())
+    name     String
+    phone    String   @unique
+    createAt DateTime @default(now())
+    userId   Int
+
+    user         User          @relation(fields: [userId], references: [id])
+    appointments Appointment[]
+
+    @@map("patients")
+}
+
+model User {
+    id       Int      @id @default(autoincrement())
+    phone    String   @unique
+    password String
+    createAt DateTime @default(now())
+
+    patients Patient[]
+
+    @@map("users")
+}
+
+model Appointment {
+    id        Int      @id @default(autoincrement())
+    date      DateTime
+    Made      Boolean  @default(false)
+    createAt  DateTime @default(now())
+    patientId Int
+    doctorId  Int
+
+    doctor  Doctor  @relation(fields: [doctorId], references: [id])
+    patient Patient @relation(fields: [patientId], references: [id])
+
+    @@map("appoinments")
+}
+
+model Doctor {
+    id           Int      @id @default(autoincrement())
+    firstName    String
+    lastName     String
+    city         String
+    state        String
+    speciality   String
+    bio          String
+    picture      String
+    price        Float
+    availability String
+    experience   String
+    attendances  Int
+    address      String
+    createAt     DateTime @default(now())
+
+    agendas     Agenda[]
+    appointment Appointment[]
+
+    @@map("doctors")
+}
+
+model Agenda {
+    id        Int      @id @default(autoincrement())
+    date      DateTime
+    available Boolean  @default(true)
+    createAt  DateTime @default(now())
+    doctorId  Int
+
+    doctor Doctor @relation(fields: [doctorId], references: [id])
+
+    @@map("agendas")
+}

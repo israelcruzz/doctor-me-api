@@ -38,18 +38,18 @@ A API deve ter os seguintes casos de uso:
 
 ### Tabelas do sistema
 
-- [ ] Patient _Paciente_
+- [X] Patient _Paciente_
   - _Campos: ID, UserID, Name, Phone, CreatedAt_
   - _Relações: Appointments[], User_
-- [ ] User
+- [X] User
   - _Campos: ID, Phone, Password, CreatedAt_
   - _Relações: Patient_
-- [ ] Appointment
+- [X] Appointment
   - _Campos: ID, Date, Made, PatientID, DoctorID, CreatedAt_
   - _Relações: Patient, Doctor_
-- [ ] Doctor
+- [X] Doctor
   - _Campos: ID, FirstName, LastName, City, State, Speciality, Bio, Picture, Price, Availability, Experience, Attendances, Address, CreatedAt_
   - _Relações: Agenda, Appointment_
-- [ ] Agenda
+- [X] Agenda
   - _Campos: ID, Date, Available, DoctorID, CreatedAt_
   - _Relações: Doctor_
