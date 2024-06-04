@@ -11,7 +11,7 @@ model Patient {
     id       Int      @id @default(autoincrement())
     name     String
     phone    String   @unique
-    createAt DateTime @default(now())
+    createdAt DateTime @default(now())
     userId   Int
 
     user         User          @relation(fields: [userId], references: [id])
@@ -24,7 +24,7 @@ model User {
     id       Int      @id @default(autoincrement())
     phone    String   @unique
     password String
-    createAt DateTime @default(now())
+    createdAt DateTime @default(now())
 
     patients Patient[]
 
@@ -35,7 +35,7 @@ model Appointment {
     id        Int      @id @default(autoincrement())
     date      DateTime
     Made      Boolean  @default(false)
-    createAt  DateTime @default(now())
+    createdAt  DateTime @default(now())
     patientId Int
     doctorId  Int
 
@@ -59,7 +59,7 @@ model Doctor {
     experience   String
     attendances  Int
     address      String
-    createAt     DateTime @default(now())
+    createdAt     DateTime @default(now())
 
     agendas     Agenda[]
     appointment Appointment[]
@@ -71,7 +71,7 @@ model Agenda {
     id        Int      @id @default(autoincrement())
     date      DateTime
     available Boolean  @default(true)
-    createAt  DateTime @default(now())
+    createdAt  DateTime @default(now())
     doctorId  Int
 
     doctor Doctor @relation(fields: [doctorId], references: [id])
